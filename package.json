@@ -1,8 +1,9 @@
 {
   "name": "point-ninja-react",
   "version": "1.0.0",
-  "description": "",
+  "description": "point.ninja reimplemented in react",
   "main": "index.js",
+  "repository": "https://github.com/ehrenmurdick/point-ninja-react.git",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,7 +26,9 @@
     "webpack": "^1.14.0"
   },
   "devDependencies": {
+    "@types/jasmine": "^2.5.41",
     "awesome-typescript-loader": "^3.0.0-beta.18",
+    "jasmine": "^2.5.3",
     "redux-devtools": "^3.3.2",
     "source-map-loader": "^0.1.6",
     "typescript": "^2.1.5"
