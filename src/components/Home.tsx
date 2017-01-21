@@ -18,10 +18,15 @@ export class Home extends React.Component<HomeProps, HomeState> {
   }
 
   componentDidMount = () => {
+    this.context.store.subscribe(() => {
+      let id = this.context.store.getState().partyState.id
+      if (id != "") {
+        this.props.router.push(`/${id}`)
+      }
+    })
   }
 
   startParty = () => {
-    console.log('eh-what?')
     this.context.store.dispatch({type: Actions.NewParty})
   }
 
