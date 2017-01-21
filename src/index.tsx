@@ -4,7 +4,7 @@ import {Router, Route, hashHistory} from 'react-router'
 import { createAppStore } from './components/state'
 import { Provider } from 'react-redux'
 
-import { Home } from "./components/Home"
+import { Home } from "./components/home"
 
 let store = createAppStore()
 

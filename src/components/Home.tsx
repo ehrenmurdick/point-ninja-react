@@ -1,41 +1,33 @@
 import * as React from 'react'
-import { MyAction, AppStore } from './state'
+import { Actions, AppStore } from './state'
 
 interface HomeState {
-  num: number
 }
 
-export class Home extends React.Component<{}, HomeState> {
+interface HomeProps {
+  router: any
+}
+
+export class Home extends React.Component<HomeProps, HomeState> {
   static contextTypes = {
-    store: React.PropTypes.any
+    store: React.PropTypes.object
   }
 
   constructor(props: {}, context: any) {
     super(props, context)
-    this.state = { num: 0 }
   }
 
   componentDidMount = () => {
-    this.context.store.subscribe(() => {
-      this.setState({
-        num: this.context.store.getState()
-      })
-    })
   }
 
-  increment = () => {
-    this.context.store.dispatch({type: MyAction.IncrementCounter})
-  }
-
-  decrement = () => {
-    this.context.store.dispatch({type: MyAction.DecrementCounter})
+  startParty = () => {
+    console.log('eh-what?')
+    this.context.store.dispatch({type: Actions.NewParty})
   }
 
   public render(): JSX.Element {
     return <div>
-    <button onClick={this.increment}>Increment!</button>
-    <button onClick={this.decrement}>Decrement!</button>
-    <p>{this.state.num}</p>
+    <button onClick={this.startParty}>Start a party!</button>
     </div>;
   }
 }

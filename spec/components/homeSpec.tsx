@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { createRenderer } from 'react-addons-test-utils'
-import { Home } from '../../src/components/Home'
+import { Home } from '../../src/components/home'
 
 describe('<Home/>', () => {
   let renderer
