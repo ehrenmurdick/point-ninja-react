@@ -26,11 +26,17 @@
     "webpack": "^1.14.0"
   },
   "devDependencies": {
+    "@types/enzyme": "^2.7.1",
     "@types/jasmine": "^2.5.41",
+    "@types/react-addons-test-utils": "^0.14.16",
     "awesome-typescript-loader": "^3.0.0-beta.18",
+    "enzyme": "^2.7.0",
     "jasmine": "^2.5.3",
+    "json-loader": "^0.5.4",
+    "react-addons-test-utils": "^15.4.2",
     "redux-devtools": "^3.3.2",
     "source-map-loader": "^0.1.6",
-    "typescript": "^2.1.5"
+    "typescript": "^2.1.5",
+    "wallaby-webpack": "0.0.31"
   }
 }

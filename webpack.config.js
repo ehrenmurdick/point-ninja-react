@@ -20,6 +20,13 @@ module.exports = {
       { test: /\.tsx?$/, loader: "awesome-typescript-loader" }
     ],
 
+    rules: [
+      {
+        test: /\.json$/,
+        use: 'json-loader'
+      }
+    ],
+
     preLoaders: [
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
       { test: /\.js$/, loader: "source-map-loader" }
@@ -32,6 +39,6 @@ module.exports = {
   // dependencies, which allows browsers to cache those libraries between builds.
   externals: {
     "react": "React",
-    "react-dom": "ReactDOM"
-  },
+    "react-dom": "ReactDOM",
+  }
 };
