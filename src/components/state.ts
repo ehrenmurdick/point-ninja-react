@@ -1,5 +1,4 @@
 import * as uuid from 'uuid'
-import persistState from 'redux-localstorage'
 import { Action, Store, createStore, combineReducers } from 'redux'
 
 import { Party, partyState } from '../reducers/parties'
@@ -24,6 +23,7 @@ interface VoteAction extends Action {
   points: string
 }
 
+
 export function createVote(points: string): VoteAction {
   return {
     type: Actions.Vote,
@@ -43,7 +43,9 @@ function votes(state: Vote[] = [], action: VoteAction): Vote[] {
 export type AppStore = Store<State>
 
 export function createAppStore(): AppStore {
-  return createStore<State>(
+  const store = createStore<State>(
     combineReducers<State>({ user, votes, partyState })
   )
+
+  return store
 }
