@@ -7,11 +7,16 @@ import { Provider } from 'react-redux'
 import { Home } from "./components/home"
 import { Party } from "./components/party"
 
+import { NewUser } from './reducers/users'
+
 let store = createAppStore()
 
 store.subscribe(() => {
   console.log(store.getState())
 })
+
+store.dispatch(NewUser())
+
 
 ReactDOM.render(
   <Provider store={store}>

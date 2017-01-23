@@ -1,9 +1,14 @@
+import * as uuid from 'uuid'
+import persistState from 'redux-localstorage'
 import { Action, Store, createStore, combineReducers } from 'redux'
+
 import { Party, partyState } from '../reducers/parties'
+import { User, NewUser, user } from '../reducers/users'
 
 export enum Actions {
   NewParty,
-  Vote
+  NewUser,
+  Vote,
 }
 
 export interface Vote {
@@ -38,8 +43,7 @@ function votes(state: Vote[] = [], action: VoteAction): Vote[] {
 export type AppStore = Store<State>
 
 export function createAppStore(): AppStore {
-  return createStore<State>(combineReducers<State>({
-    votes,
-    partyState
-  }))
+  return createStore<State>(
+    combineReducers<State>({ user, votes, partyState })
+  )
 }
