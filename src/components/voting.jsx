@@ -7,7 +7,7 @@ const option = (n) => (
 )
 
 const voteLi = (v) => (
-  <li>{v.points}</li>
+  <li key={v.id}>{v.points}</li>
 )
 
 const values = [0, 1, 2, 3, 5, 8]
