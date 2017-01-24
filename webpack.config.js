@@ -13,5 +13,8 @@ module.exports = {
       { test: path.join(__dirname, 'src'),
         loader: 'babel-loader' }
     ]
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
   }
 };
