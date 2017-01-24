@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
 import { Vote } from '../actions/vote'
+import { LeaveParty } from '../actions/leaveParty'
+
 import _ from 'lodash'
 
 const option = (n) => (
@@ -14,7 +16,7 @@ const values = [0, 1, 2, 3, 5, 8]
 
 let pointInput
 
-const view = ({vote, votes}) => (
+const view = ({vote, votes, leaveParty}) => (
   <div>
     <select ref={el => pointInput = el}>
       {_.map(values, option)}
@@ -23,6 +25,7 @@ const view = ({vote, votes}) => (
     <ul>
       {_.map(votes, voteLi)}
     </ul>
+    <a href="#" onClick={leaveParty}>Leave this party</a>
   </div>
 )
 
@@ -31,7 +34,11 @@ const mapToProps = (state) => ({
 })
 
 const mapToDispatch = (dispatch) => ({
-  vote: () => dispatch(Vote(pointInput.value))
+  vote: () => dispatch(Vote(pointInput.value)),
+  leaveParty: (e) => {
+    e.preventDefault()
+    dispatch(LeaveParty())
+  }
 })
 
 export const Voting = connect(mapToProps, mapToDispatch)(view)

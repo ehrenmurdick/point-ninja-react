@@ -1,16 +1,15 @@
 import { CreatePartyAction } from '../actions/createParty'
 import { LeavePartyAction } from '../actions/leaveParty'
-import consts from '../constants'
-import uuid from 'uuid'
 
-export const party = (state = {}, action) => {
+export const route = (state = {location: '/'}, action) => {
   if (action.type == CreatePartyAction) {
     return {
-      id: uuid.v4(),
-      scale: consts.Scales[action.scale]
+      location: `/vote`
     }
   } else if (action.type == LeavePartyAction) {
-    return {}
+    return {
+      location: '/'
+    }
   }
   return state
 }

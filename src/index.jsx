@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Provider } from 'react-redux'
-import { Router, Route, browserHistory } from 'react-router'
+import { Router, Route, hashHistory } from 'react-router'
 
 import { Voting } from './components/voting'
 import { Home } from './components/home'
@@ -11,7 +11,7 @@ const store = createAppStore()
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router history={hashHistory}>
       <Route path="/" component={Home} />
       <Route path="/vote" component={Voting} />
     </Router>
