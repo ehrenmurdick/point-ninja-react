@@ -10,16 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/es6-promise": "0.0.32",
-    "@types/isomorphic-fetch": "0.0.32",
-    "@types/js-cookie": "^2.0.28",
-    "@types/lodash": "^4.14.50",
-    "@types/react": "^15.0.0",
-    "@types/react-dom": "^0.14.20",
-    "@types/react-redux": "^4.4.36",
-    "@types/react-router": "^2.0.45",
-    "@types/redux": "^3.6.0",
-    "@types/uuid": "^2.0.29",
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
     "babel-plugin-transform-react-jsx": "^6.22.0",
@@ -41,9 +31,6 @@
     "webpack": "^1.14.0"
   },
   "devDependencies": {
-    "@types/enzyme": "^2.7.1",
-    "@types/jasmine": "^2.5.41",
-    "@types/react-addons-test-utils": "^0.14.16",
     "awesome-typescript-loader": "^3.0.0-beta.18",
     "enzyme": "^2.7.0",
     "jasmine": "^2.5.3",
