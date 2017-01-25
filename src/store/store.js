@@ -1,16 +1,13 @@
-import { createStore, combineReducers } from 'redux'
-import { hashHistory } from 'react-router'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { routeMiddleware } from '../middlewares/routeMiddleware'
 import reducer from '../reducers/index'
 
 export const createAppStore = () => {
-  const store = createStore(reducer)
+  const middleware = applyMiddleware(routeMiddleware)
+  const store = createStore(reducer, middleware)
 
   store.subscribe(() => {
     console.log(store.getState())
-  })
-
-  store.subscribe(() => {
-    hashHistory.push(store.getState().route.location)
   })
 
   return store
