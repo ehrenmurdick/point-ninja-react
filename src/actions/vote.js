@@ -1,6 +1,7 @@
 export const VoteAction = 'VOTE'
 
-export const Vote = (n) => ({
+export const Vote = (points, userId) => ({
   type: VoteAction,
-  points: n
+  points,
+  userId
 })

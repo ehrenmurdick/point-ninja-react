@@ -1,15 +1,10 @@
 import { CreatePartyAction } from '../actions/createParty'
 import { LeavePartyAction } from '../actions/leaveParty'
+import { createReducer } from './reducer'
+import { routes } from '../routes'
 
-export const route = (state = {location: '/'}, action) => {
-  if (action.type == CreatePartyAction) {
-    return {
-      location: `/vote`
-    }
-  } else if (action.type == LeavePartyAction) {
-    return {
-      location: '/'
-    }
-  }
-  return state
-}
+const defaultRoute = {location: '/'}
+export const route = createReducer(defaultRoute, {
+  [CreatePartyAction]: () => ({ location: routes.votePath }),
+  [LeavePartyAction]: () =>  ({ location: routes.rootPath })
+})
