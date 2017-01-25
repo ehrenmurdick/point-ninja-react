@@ -11,7 +11,7 @@ const option = (n) => (
 )
 
 const voteLi = (v) => (
-  <li key={v.id}>{v.points}</li>
+  <li key={v.uuid}>{v.points}</li>
 )
 
 const shouldShowVotes = (votes, userId) => !_.isNil(_.find(votes, (v) => v.userId === userId))
@@ -25,12 +25,12 @@ const If = ({children, test}) => {
 }
 
 let pointInput
-const view = ({values, vote, votes, leaveParty, userId}) => (
+const view = ({values, vote, votes, leaveParty, userId, partyId}) => (
   <div>
     <select ref={el => pointInput = el}>
       {_.map(values, option)}
     </select>
-    <button onClick={vote(userId)}>Vote</button>
+    <button onClick={vote(userId, partyId)}>Vote</button>
 
     <If test={shouldShowVotes(votes, userId)}>
       <ul>{_.map(votes, voteLi)}</ul>
@@ -38,18 +38,19 @@ const view = ({values, vote, votes, leaveParty, userId}) => (
 
     <a href="#" onClick={leaveParty}>Leave this party</a>
 
-    <button onClick={vote(uuid.v4())}>Fake teamwork</button>
+    <button onClick={vote(uuid.v4(), partyId)}>Fake teamwork</button>
   </div>
 )
 
 const mapToProps = (state) => ({
   votes: state.votes,
   values: state.party.scale,
-  userId: state.currentUser.id
+  userId: state.currentUser.id,
+  partyId: state.party.id,
 })
 
 const mapToDispatch = (dispatch) => ({
-  vote: (userId) => () => dispatch(Vote(pointInput.value, userId)),
+  vote: (userId, partyId) => () => dispatch(Vote(pointInput.value, userId, partyId)),
   leaveParty: (e) => {
     e.preventDefault()
     dispatch(LeaveParty())
