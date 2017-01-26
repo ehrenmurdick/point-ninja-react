@@ -1,3 +1,5 @@
+let webpack = require('webpack')
+
 var path = require('path');
 module.exports = {
   entry: './src/index.jsx',
@@ -16,5 +18,15 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
-  }
+  },
+  // uncomment everything below here to build a tiny production bundle
+  // plugins: [
+  //   new webpack.optimize.UglifyJsPlugin({minimize: true})
+  // ],
+  // externals: {
+    // react: "React",
+    // redux: "redux",
+    // "react-redux": "React",
+    // "lodash": "_",
+  // }
 };
