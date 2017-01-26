@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { Vote } from '../actions/vote'
 import { LeaveParty } from '../actions/leaveParty'
 import { routes } from '../routes'
+import consts from '../constants'
 
 import uuid from 'uuid'
 
