@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { Vote } from '../actions/vote'
 import { LeaveParty } from '../actions/leaveParty'
+import { routes } from '../routes'
 
 import uuid from 'uuid'
 
@@ -46,7 +47,7 @@ const mapToProps = (state) => ({
   votes: state.votes,
   values: state.party.scale,
   userId: state.currentUser.id,
-  partyId: state.party.id,
+  partyId: state.party.uuid,
 })
 
 const mapToDispatch = (dispatch) => ({

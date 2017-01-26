@@ -18,7 +18,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path={routes.rootPath} component={Home} />
-      <Route path={routes.votePath} component={Voting} />
+      <Route path={routes.joinPath} component={Voting} />
     </Router>
   </Provider>,
   document.getElementById("app")

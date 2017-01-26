@@ -2,8 +2,11 @@ import { routes } from '../routes'
 
 export const JoinPartyAction = 'JOIN_PARTY'
 
-export const JoinParty = (scale) => ({
+export const JoinParty = (uuid) => ({
   type: JoinPartyAction,
   nextLocation: routes.votePath,
-  scale
+  params: {partyId: uuid},
+  uuid,
 })
+
+export default JoinParty
