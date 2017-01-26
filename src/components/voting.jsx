@@ -45,7 +45,7 @@ const view = ({values, vote, votes, leaveParty, userId, partyId}) => (
 
 const mapToProps = (state) => ({
   votes: state.votes,
-  values: state.party.scale,
+  values: consts.Scales["Fibonacci"],
   userId: state.currentUser.id,
   partyId: state.party.uuid,
 })

@@ -8,7 +8,7 @@ import uuid from 'uuid'
 const createParty = (state, action) => {
   return {
     uuid: action.uuid,
-    scale: consts.Scales[action.scale]
+    scale: consts.Scales["Fibonacci"]
   }
 }
 
