@@ -3,9 +3,7 @@ import { votes } from './votes'
 import { party } from './party'
 import { currentUser } from './currentUser'
 
-const log = (state = [], action) => {
-  return _.concat(state, action)
-}
+const log = (state = [], action) => _.slice(_.concat(state, action), 0, 5)
 
 export default combineReducers({
   log,

@@ -2,6 +2,7 @@ import _ from 'lodash'
 
 import { SyncVoteAction, VoteAction } from '../actions/vote'
 import { LeavePartyAction } from '../actions/leaveParty'
+import { JoinPartyAction } from '../actions/join'
 import { createReducer } from './reducer'
 
 
@@ -31,5 +32,6 @@ const syncVote = (state, action) => {
 export const votes = createReducer([], {
   [VoteAction]: createVote,
   [SyncVoteAction]: syncVote,
-  [LeavePartyAction]: (state, action) => []
+  [LeavePartyAction]: (state, action) => [],
+  [JoinPartyAction]: (state, action) => [],
 })

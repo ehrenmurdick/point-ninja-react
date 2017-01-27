@@ -5,6 +5,10 @@ import { createReducer } from './reducer'
 
 
 export const currentUser = createReducer({}, {
-  [CreateUserAction]: (state, action) => ({ id: uuid.v4() }),
+  [CreateUserAction]: (state, action) => {
+    return _.assign({
+      id: uuid.v4()
+    }, state)
+  },
   [JoinPartyAction]: (state, action) => (_.assign(state, {userName: action.userName}))
 })

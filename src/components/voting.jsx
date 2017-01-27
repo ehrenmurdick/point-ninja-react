@@ -4,8 +4,6 @@ import { LeaveParty } from '../actions/leaveParty'
 import { routes } from '../routes'
 import consts from '../constants'
 
-import uuid from 'uuid'
-
 import _ from 'lodash'
 
 const option = (n) => (
@@ -40,8 +38,6 @@ const view = ({values, vote, votes, leaveParty, userId, partyId, userName}) => (
 
     <a href="#" onClick={leaveParty(partyId)}>Leave this party</a>
     <div>{window.location.origin+'/#'+routes.joinPath.replace(':partyId', partyId)}</div>
-
-    <button onClick={vote(uuid.v4(), partyId)}>Fake teamwork</button>
   </div>
 )
 

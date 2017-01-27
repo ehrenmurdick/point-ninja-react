@@ -3,9 +3,9 @@ import { JoinParty } from '../actions/join'
 
 let nameInput
 
-const view = ({join, params}) => (
+const view = ({join, params, userName}) => (
   <div>
-    <input ref={(el) => nameInput = el}/>
+    <input defaultValue={userName} ref={(el) => nameInput = el}/>
     <button onClick={join(params.partyId)}>Join!</button>
   </div>
 )
@@ -15,6 +15,7 @@ const joinParty = (dispatch) => (partyId) => () => {
 }
 
 const mapToProps = (state) => ({
+  userName: state.currentUser.userName
 })
 
 const mapToDispatch = (dispatch) => ({

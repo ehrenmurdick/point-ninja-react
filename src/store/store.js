@@ -5,7 +5,22 @@ import reducer from '../reducers/index'
 
 export const createAppStore = () => {
   const middleware = applyMiddleware(routeMiddleware, websocketMiddleware)
-  const store = createStore(reducer, middleware)
+
+  let state = {}
+  try {
+    let prevState = JSON.parse(window.localStorage.getItem('state'))
+    if (!_.isNil(prevState)) {
+      state = prevState
+    }
+  } catch (e) {
+    console.log(e)
+  }
+
+  const store = createStore(reducer, state, middleware)
+
+  store.subscribe(() => {
+    window.localStorage.setItem('state', JSON.stringify(store.getState()))
+  })
 
   store.subscribe(() => {
     console.log('---- state ----------------')
