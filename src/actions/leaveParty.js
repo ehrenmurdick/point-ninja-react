@@ -2,7 +2,8 @@ import { routes } from '../routes'
 
 export const LeavePartyAction = 'LEAVE_PARTY'
 
-export const LeaveParty = () => ({
+export const LeaveParty = (uuid) => ({
   type: LeavePartyAction,
-  nextLocation: routes.rootPath
+  nextLocation: routes.rootPath,
+  uuid
 })

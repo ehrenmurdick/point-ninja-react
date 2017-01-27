@@ -38,7 +38,7 @@ const view = ({values, vote, votes, leaveParty, userId, partyId}) => (
       <ul>{_.map(votes, voteLi)}</ul>
     </If>
 
-    <a href="#" onClick={leaveParty}>Leave this party</a>
+    <a href="#" onClick={leaveParty(partyId)}>Leave this party</a>
 
     <button onClick={vote(uuid.v4(), partyId)}>Fake teamwork</button>
   </div>
@@ -53,9 +53,9 @@ const mapToProps = (state) => ({
 
 const mapToDispatch = (dispatch) => ({
   vote: (userId, partyId) => () => dispatch(Vote(pointInput.value, userId, partyId)),
-  leaveParty: (e) => {
+  leaveParty: (partyId) => (e) => {
     e.preventDefault()
-    dispatch(LeaveParty())
+    dispatch(LeaveParty(partyId))
   }
 })
 

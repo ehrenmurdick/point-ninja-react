@@ -8,7 +8,9 @@ export const createAppStore = () => {
   const store = createStore(reducer, middleware)
 
   store.subscribe(() => {
+    console.log('---- state ----------------')
     console.log(store.getState())
+    console.log('----/state ----------------')
   })
 
   return store
