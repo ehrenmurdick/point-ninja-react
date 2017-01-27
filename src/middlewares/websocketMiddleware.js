@@ -10,8 +10,8 @@ let connection = new WebSocket('ws://localhost:8001')
 
 export const websocketMiddleware = store => {
   connection.onmessage = (response) => {
-    let votes = JSON.parse(response.data)
-    store.dispatch(SyncVote(votes))
+    let action = JSON.parse(response.data)
+    store.dispatch(action)
   }
 
   return (next) => (action) => {
