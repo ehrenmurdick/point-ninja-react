@@ -39,6 +39,7 @@ const view = ({values, vote, votes, leaveParty, userId, partyId}) => (
     </If>
 
     <a href="#" onClick={leaveParty(partyId)}>Leave this party</a>
+    <div>{window.location.origin+'/#'+routes.joinPath.replace(':partyId', partyId)}</div>
 
     <button onClick={vote(uuid.v4(), partyId)}>Fake teamwork</button>
   </div>
