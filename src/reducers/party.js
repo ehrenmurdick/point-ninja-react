@@ -1,5 +1,5 @@
 import { CreatePartyAction } from '../actions/createParty'
-import { JoinPartyAction } from '../actions/join'
+import { JoinPartyAction } from '../actions/joinParty'
 import { LeavePartyAction } from '../actions/leaveParty'
 import { createReducer } from './reducer'
 import consts from '../constants'

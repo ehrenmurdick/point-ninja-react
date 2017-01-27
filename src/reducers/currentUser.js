@@ -1,6 +1,6 @@
 import uuid from 'uuid'
 import { CreateUserAction } from '../actions/createUser'
-import { JoinPartyAction } from '../actions/join'
+import { JoinPartyAction } from '../actions/joinParty'
 import { createReducer } from './reducer'
 
 

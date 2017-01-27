@@ -3,7 +3,7 @@ import { hashHistory } from 'react-router'
 
 import { SyncVote, VoteAction } from '../actions/vote'
 import { CreatePartyAction } from '../actions/createParty'
-import { JoinPartyAction } from '../actions/join'
+import { JoinPartyAction } from '../actions/joinParty'
 import { LeavePartyAction } from '../actions/leaveParty'
 
 let connection = new WebSocket('ws://localhost:8001')

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { JoinParty } from '../actions/join'
+import { JoinParty } from '../actions/joinParty'
 
 let nameInput
 

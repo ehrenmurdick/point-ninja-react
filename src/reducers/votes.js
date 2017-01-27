@@ -2,7 +2,7 @@ import _ from 'lodash'
 
 import { SyncVoteAction, VoteAction } from '../actions/vote'
 import { LeavePartyAction } from '../actions/leaveParty'
-import { JoinPartyAction } from '../actions/join'
+import { JoinPartyAction } from '../actions/joinParty'
 import { createReducer } from './reducer'
 
 
