@@ -5,6 +5,8 @@ export const TestReducer = (state = [], action) => {
     case 'ADD_ITEM':
     case 'REMOTE_ADD_ITEM':
       return _.concat(state, action.n)
+    case 'REMOTE_RESET':
+      return action.state.TestReducer
     default:
       return state
   }

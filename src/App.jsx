@@ -18,30 +18,6 @@ class App extends Component {
             <img src={logo} className="App-logo" alt="logo" />
             <h2>Welcome to React</h2>
           </div>
-          <div>
-            <input type="number" />
-            <button>Vote</button>
-          </div>
-
-          <center>
-            <table className="votes">
-              <tbody>
-                <tr>
-                  <td>3</td>
-                  <td>Ehren</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>Alice</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Bob</td>
-                </tr>
-              </tbody>
-            </table>
-          </center>
-          <button>Next story</button>
 
           <Test />
         </div>

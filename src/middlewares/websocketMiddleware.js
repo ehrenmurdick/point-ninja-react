@@ -9,6 +9,10 @@ export const websocketMiddleware = store => {
     store.dispatch(action)
   }
 
+  conn.onopen = () => {
+    store.dispatch({type: 'SYNC'})
+  }
+
   return (next) => (action) => {
     if (!_.startsWith(action.type, 'REMOTE_')) {
       conn.send(JSON.stringify(action))
