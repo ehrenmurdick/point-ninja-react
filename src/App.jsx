@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-
 
 import './App.css';
 import {Test} from './components'
+import { createAppStore } from './reducers'
 
-
-const reducer = (state = [], action) => state
-const store = createStore(reducer)
+const store = createAppStore()
 
 class App extends Component {
   render() {
