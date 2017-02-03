@@ -8,11 +8,12 @@ var server = ws.createServer(function (conn) {
 
   conn.on("text", function (str) {
     console.log(str)
-    console.log(connections.length)
     connections.reject(conn).each((c) => c.send(str))
   })
 
   conn.on("close", function (code, reason) {
     connections = connections.reject(connections)
   })
+
+  conn.on('error', () => {})
 }).listen(8001)
