@@ -15,6 +15,7 @@ export const websocketMiddleware = store => {
 
   return (next) => (action) => {
     if (!_.startsWith(action.type, 'REMOTE_')) {
+      action.id = store.getState().id
       conn.send(JSON.stringify(action))
     }
     next(action)

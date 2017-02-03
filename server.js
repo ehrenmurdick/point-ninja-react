@@ -8,11 +8,18 @@ var server = ws.createServer(function (conn) {
 
   conn.on("text", function (str) {
     console.log(str)
-    connections.reject(conn).each((c) => c.send(str))
+    console.log(connections.size())
+    conn.id = JSON.parse(str).id
+    if (connections.size() === 1) {
+      conn.send(JSON.stringify({type: 'NOBODY_HOME'}))
+    } else {
+      connections.reject(conn).each((c) => c.send(str))
+    }
   })
 
   conn.on("close", function (code, reason) {
-    connections = connections.reject(connections)
+    connections = connections.reject(conn)
+    connections.each((c) => c.send(JSON.stringify({type: 'LEAVE', id: conn.id})))
   })
 
   conn.on('error', () => {})
