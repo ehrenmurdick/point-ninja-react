@@ -8,16 +8,20 @@ const itemLi = (i) => (
 
 const max = (a) => _.reduce(a, ((x, y) => x > y ? x : y), 0)
 
-const view = ({items, participants, sendItem, sync}) => (
+const view = ({items, participants, sendItem}) => (
   <div>
     <button onClick={sendItem(max(items)+1)}>Send item</button>
-    <button onClick={sync}>Sync</button>
-    <ul style={{float: 'left'}}>
-      {_.map(items, itemLi)}
-    </ul>
-    <ul style={{float: 'right'}}>
-      {_.map(participants, itemLi)}
-    </ul>
+    <div className="clear"></div>
+    <div className="left">
+      <ul>
+        {_.map(items, itemLi)}
+      </ul>
+    </div>
+    <div className="right">
+      <ul>
+        {_.map(participants, itemLi)}
+      </ul>
+    </div>
   </div>
 )
 
@@ -28,7 +32,6 @@ const mapToProps = (state) => ({
 
 const mapToDispatch = (dispatch) => ({
   sendItem: (n) => () => dispatch({type: 'ADD_ITEM', n}),
-  sync: () => dispatch({type: 'SYNC'})
 })
 
 export const Test = connect(mapToProps, mapToDispatch)(view)
