@@ -8,18 +8,22 @@ var server = ws.createServer(function (conn) {
 
   conn.on("text", function (str) {
     console.log(str)
-    console.log(connections.size())
-    conn.id = JSON.parse(str).id
-    if (connections.size() === 1) {
+    console.log(connections.length)
+    let action = JSON.parse(str)
+    conn.id = action.id
+    conn.partyId = action.partyId
+
+    let members = _.filter(_.compact(connections), (c) => c.partyId === conn.partyId)
+    if (_.size(members) === 1) {
       conn.send(JSON.stringify({type: 'NOBODY_HOME'}))
     } else {
-      connections.reject(conn).each((c) => c.send(str))
+      _.each(_.reject(members, (c) => c === conn), (c) => c.send(str))
     }
   })
 
   conn.on("close", function (code, reason) {
-    connections = connections.reject(conn)
-    connections.each((c) => c.send(JSON.stringify({type: 'LEAVE', id: conn.id})))
+    connections = _.reject(_.compact(connections), (c) => c === conn)
+    _.each(connections, (c) => c.send(JSON.stringify({type: 'LEAVE', id: conn.id})))
   })
 
   conn.on('error', () => {})

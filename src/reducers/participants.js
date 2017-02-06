@@ -9,6 +9,7 @@ export const participants = (state = [], action) => {
       return concat(state, action.state.participants)
     case 'REMOTE_LEAVE':
       return reject(state, (id) => id === action.id)
+    default:
+      return state
   }
-  return state
 }

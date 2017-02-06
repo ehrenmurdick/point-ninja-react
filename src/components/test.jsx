@@ -3,16 +3,17 @@ import * as _ from 'lodash'
 import * as React from 'react'
 
 const itemLi = (i) => (
-  <li>{i}</li>
+  <li key={i}>{i}</li>
 )
 
 const max = (a) => _.reduce(a, ((x, y) => x > y ? x : y), 0)
 
-const view = ({items, participants, sendItem}) => (
+const view = ({items, participants, sendItem, partyId, newParty}) => (
   <div>
     <button onClick={sendItem(max(items)+1)}>Send item</button>
     <div className="clear"></div>
     <div className="left">
+      {partyId}
       <ul>
         {_.map(items, itemLi)}
       </ul>
@@ -25,9 +26,10 @@ const view = ({items, participants, sendItem}) => (
   </div>
 )
 
-const mapToProps = (state) => ({
+const mapToProps = (state, ownProps) => ({
   items: state.TestReducer,
   participants: state.participants,
+  partyId: ownProps.partyId,
 })
 
 const mapToDispatch = (dispatch) => ({
