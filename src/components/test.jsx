@@ -2,6 +2,8 @@ import { connect } from 'react-redux'
 import * as _ from 'lodash'
 import * as React from 'react'
 
+import { Participants } from './participants'
+
 const itemLi = (i) => (
   <li key={i}>{i}</li>
 )
@@ -13,15 +15,12 @@ const view = ({items, participants, sendItem, partyId, newParty}) => (
     <button onClick={sendItem(max(items)+1)}>Send item</button>
     <div className="clear"></div>
     <div className="left">
-      {partyId}
       <ul>
         {_.map(items, itemLi)}
       </ul>
     </div>
     <div className="right">
-      <ul>
-        {_.map(participants, itemLi)}
-      </ul>
+      <Participants />
     </div>
   </div>
 )

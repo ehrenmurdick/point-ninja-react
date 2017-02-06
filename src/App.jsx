@@ -14,11 +14,11 @@ class App extends Component {
     let partyId = store.getState().partyId
 
     let paramId = this.props.params.partyId
-    console.log(_.isNil(paramId))
     if (!_.isNil(paramId)) {
       store.dispatch({type: 'SYNC', partyId: paramId})
     } else {
       hashHistory.push(partyId)
+      store.dispatch({type: 'SYNC', partyId: partyId})
     }
   }
 
