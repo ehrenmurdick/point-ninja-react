@@ -8,7 +8,7 @@ const itemLi = (user) => (i) => {
   if (user.id === i.id) {
     return <Name key={user.id}/>
   } else {
-    return <li key={i.id}>{i.id}</li>
+    return <li key={i.id}>{i.name || 'anon'}</li>
   }
 }
 

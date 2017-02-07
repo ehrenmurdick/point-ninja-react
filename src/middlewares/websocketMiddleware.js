@@ -27,7 +27,7 @@ export const websocketMiddleware = store => {
   return (next) => (action) => {
     if (!_.startsWith(action.type, 'REMOTE_')) {
       let state = store.getState()
-      action.id = state.id
+      action.id = state.user.id
       if (_.isNil(action.partyId)) {
         action.partyId = state.partyId
       }

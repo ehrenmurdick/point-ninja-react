@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 let nameInput
 
-const view = ({id, editingName, editName, updateName}) => {
+const view = ({user, editingName, editName, updateName}) => {
   if (editingName) {
     return <li className="you editing">
       <input type="text" ref={(e) => nameInput = e} />
@@ -12,15 +12,15 @@ const view = ({id, editingName, editName, updateName}) => {
     </li>
   } else {
     return <li className="you">
-      {id.name || 'anon'} (you)
+      {user.name || 'anon'} (you)
       <button onClick={editName}>change</button>
     </li>
   }
 }
 
-const mapToProps = ({id, uiReducer}) => ({
+const mapToProps = ({user, uiReducer}) => ({
   editingName: uiReducer.editingName,
-  id,
+  user,
 })
 
 const mapToDispatch = (dispatch) => ({
