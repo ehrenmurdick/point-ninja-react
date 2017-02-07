@@ -1,0 +1,27 @@
+@import "bourbon"
+@import "neat"
+
+.App
+  @include outer-container
+  font-family: $helvetica
+
+
+.participants
+  @include span-columns(12)
+  border: 1px solid #eee
+
+
+.vote
+  @include span-columns(12)
+  @include padding(1em 1em 0em 1em)
+
+  input
+    margin: 0
+
+  .participant
+    @include span-columns(6 of 12)
+
+  .value
+    @include span-columns(6 of 12)
+    @include omega
+

@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { hashHistory } from 'react-router'
+import { Votes } from './components'
 import * as _ from 'lodash'
 
-import './App.css';
+import './App.sass';
 
 class App extends Component {
   static contextTypes = { store: React.PropTypes.object }
@@ -23,6 +24,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Votes />
       </div>
     );
   }
