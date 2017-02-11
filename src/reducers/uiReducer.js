@@ -6,6 +6,8 @@ export const uiReducer = (state = {}, action) => {
       return assign(stubObject(), state, {editingName: false})
     case 'EDIT_NAME':
       return assign(stubObject(), state, {editingName: true})
+    case 'VOTE':
+      return assign(stubObject(), state, {hasVoted: true})
     default:
       return state
   }

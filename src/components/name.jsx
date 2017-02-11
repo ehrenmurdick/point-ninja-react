@@ -6,16 +6,24 @@ let nameInput
 
 const view = ({user, editingName, editName, updateName}) => {
   if (editingName) {
-    return <li className="you editing">
-      <input type="text" ref={(e) => nameInput = e} />
-      <button onClick={updateName}>save</button>
-    </li>
+    return <div>
+      <form onSubmit={updateName}>
+        <input autoFocus type="text" ref={(e) => nameInput = e} />
+        <button>save</button>
+      </form>
+    </div>
   } else {
-    return <li className="you">
-      {user.name || 'anon'} (you)
+    return <div>
+      {user.name || 'anon (you)'}
       <button onClick={editName}>change</button>
-    </li>
+    </div>
   }
+}
+
+
+const updateName = (dispatch) => (event) => {
+  event.preventDefault()
+  dispatch({type: 'UPDATE_NAME', name: nameInput.value})
 }
 
 const mapToProps = ({user, uiReducer}) => ({
@@ -25,7 +33,7 @@ const mapToProps = ({user, uiReducer}) => ({
 
 const mapToDispatch = (dispatch) => ({
   editName: () => dispatch({type: 'EDIT_NAME'}),
-  updateName: () => dispatch({type: 'UPDATE_NAME', name: nameInput.value}),
+  updateName: updateName(dispatch),
 })
 
 export const Name = connect(mapToProps, mapToDispatch)(view)
