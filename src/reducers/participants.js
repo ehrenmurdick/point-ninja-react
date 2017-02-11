@@ -1,4 +1,4 @@
-import {assign, stubObject, slice, findIndex, concat, reject} from 'lodash'
+import {map, assign, stubObject, slice, findIndex, concat, reject} from 'lodash'
 
 
 const update = (ary, oldId, newValue) => {
@@ -8,6 +8,12 @@ const update = (ary, oldId, newValue) => {
     assign(stubObject(), ary[idx], newValue),
     ...slice(ary, idx+1)
   ]
+}
+
+const updateAll = (ary, newValue) => {
+  return map(ary, (p) => {
+    return assign(stubObject(), p, newValue)
+  })
 }
 
 export const participants = (state = [], action) => {
@@ -25,6 +31,9 @@ export const participants = (state = [], action) => {
     case 'VOTE':
     case 'REMOTE_VOTE':
       return update(state, action.id, {vote: action.value})
+    case 'REMOTE_NEXT':
+    case 'NEXT':
+      return updateAll(state, {vote: null})
     default:
       return state
   }

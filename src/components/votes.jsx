@@ -17,9 +17,10 @@ const vote = (user) => (participant) => {
   </div>
 }
 
-const view = ({participants, user}) => (
+const view = ({participants, user, nextRound}) => (
   <div className="votes">
     {map(participants, vote(user))}
+    <button onClick={nextRound}>Next round!</button>
   </div>
 )
 
@@ -29,6 +30,11 @@ const mapToProps = ({participants, user}) => ({
 })
 
 const mapToDispatch = (dispatch) => ({
+  nextRound: () => {
+    dispatch({
+      type: "NEXT"
+    })
+  }
 })
 
 export const Votes = connect(mapToProps, mapToDispatch)(view)
