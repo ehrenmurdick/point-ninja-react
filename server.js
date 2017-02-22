@@ -20,7 +20,7 @@ const server = express()
 
 const wss = new WebSocket.Server({ server })
 
-const onRedisMessage = (channel, msg) => {
+const onRedisMessage = (conn) => (channel, msg) => {
   conn.send(msg)
 }
 
@@ -33,7 +33,7 @@ const updateConnection = (conn, action) => {
     }
     conn.redisClient = redis.createClient()
     conn.redisClient.subscribe(conn.partyId)
-    conn.redisClient.on('message', onRedisMessage)
+    conn.redisClient.on('message', onRedisMessage(conn))
   }
 }
 
