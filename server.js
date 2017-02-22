@@ -4,12 +4,15 @@ const path = require('path')
 const redis = require('redis')
 const _ = require('lodash')
 
+
+const redisURL = process.env.REDIS_URL
+
 var connections = []
 
 const PORT = process.env.PORT || 3000
 const INDEX = 'index.html'
 
-const publisher = redis.createClient()
+const publisher = redis.createClient(redisURL)
 
 const server = express()
   .use((req, res) => {
@@ -31,7 +34,7 @@ const updateConnection = (conn, action) => {
     if (!_.isNil(conn.redisClient)) {
       conn.redisClient.quit()
     }
-    conn.redisClient = redis.createClient()
+    conn.redisClient = redis.createClient(redisURL)
     conn.redisClient.subscribe(conn.partyId)
     conn.redisClient.on('message', onRedisMessage(conn))
   }
