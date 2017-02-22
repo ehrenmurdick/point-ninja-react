@@ -7,12 +7,16 @@ const _ = require('lodash')
 
 const redisURL = process.env.REDIS_URL
 
-var connections = []
-
 const PORT = process.env.PORT || 3000
 const INDEX = 'index.html'
 
 const publisher = redis.createClient(redisURL)
+
+const onRedisErr = (e) => {
+  console.log(e)
+}
+
+publisher.on('error', onRedisErr)
 
 const server = express()
   .use((req, res) => {
