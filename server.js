@@ -1,30 +1,54 @@
-var ws = require("nodejs-websocket")
-var _ = require("lodash")
+const express = require('express')
+const WebSocket = require('ws')
+const path = require('path')
+const redis = require('redis')
+const _ = require('lodash')
 
-var connections = _([])
+var connections = []
 
-var server = ws.createServer(function (conn) {
-  connections = connections.concat(conn)
+const PORT = process.env.PORT || 3000
+const INDEX = 'index.html'
 
-  conn.on("text", function (str) {
-    console.log(str)
-    console.log(connections.length)
-    let action = JSON.parse(str)
-    conn.id = action.id
+const publisher = redis.createClient()
+
+const server = express()
+  .use((req, res) => {
+    console.log(req.originalUrl)
+    return res.sendFile(req.originalUrl, { root: path.join(__dirname, 'build') })
+  })
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
+const wss = new WebSocket.Server({ server })
+
+const onRedisMessage = (channel, msg) => {
+  conn.send(msg)
+}
+
+const updateConnection = (conn, action) => {
+  conn.id = action.id
+  if (conn.partyId !== action.partyId) {
     conn.partyId = action.partyId
-
-    let members = _.filter(_.compact(connections), (c) => c.partyId === conn.partyId)
-    if (_.size(members) === 1) {
-      conn.send(JSON.stringify({type: 'NOBODY_HOME'}))
-    } else {
-      _.each(_.reject(members, (c) => c === conn), (c) => c.send(str))
+    if (!_.isNil(conn.redisClient)) {
+      conn.redisClient.quit()
     }
+    conn.redisClient = redis.createClient()
+    conn.redisClient.subscribe(conn.partyId)
+    conn.redisClient.on('message', onRedisMessage)
+  }
+}
+
+wss.on('connection', function (conn) {
+  conn.on("message", function (str) {
+    let action = JSON.parse(str)
+    updateConnection(conn, action)
+    publisher.publish(conn.partyId, str)
   })
 
   conn.on("close", function (code, reason) {
-    connections = _.reject(_.compact(connections), (c) => c === conn)
-    _.each(connections, (c) => c.send(JSON.stringify({type: 'LEAVE', id: conn.id})))
+    console.log(conn.id + ' left')
+    conn.redisClient.quit()
+    publisher.publish(conn.partyId, JSON.stringify({type: 'LEAVE', id: conn.id}))
   })
 
   conn.on('error', () => {})
-}).listen(8001)
+})

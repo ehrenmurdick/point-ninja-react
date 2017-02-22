@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { Provider } from 'react-redux'
 import { Router, Route, hashHistory } from 'react-router'
-import './index.css';
+import './index.sass';
 
 import { createAppStore } from './reducers'
 

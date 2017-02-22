@@ -1,12 +1,22 @@
 var autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+// var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var ManifestPlugin = require('webpack-manifest-plugin');
 var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var url = require('url');
 var paths = require('./paths');
 var getClientEnvironment = require('./env');
+var path = require('path');
+
+const bourbon = require('node-bourbon').includePaths;
+const neat = require('node-neat').includePaths;
+
+var _ = require('lodash');
+
+var sassPaths = _.join(_.map(_.flattenDeep(_.concat(bourbon, neat)), (p) => (
+  "includePaths[]="+path.resolve(__dirname, p)
+), '&'))
 
 
 
@@ -87,7 +97,7 @@ module.exports = {
       'react-native': 'react-native-web'
     }
   },
-  
+
   module: {
     // First, run the linter.
     // It's important to do this before Babel processes the JS.
@@ -130,7 +140,12 @@ module.exports = {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
         loader: 'babel',
-        
+
+      },
+      {
+        test: /\.sass$/,
+        include: paths.appSrc,
+        loaders: ["style", "css", "sass?"+sassPaths]
       },
       // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.
@@ -144,11 +159,11 @@ module.exports = {
       // tags. If you use code splitting, however, any async bundles will still
       // use the "style" loader inside the async code so CSS from them won't be
       // in the main CSS file.
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css?importLoaders=1!postcss')
+      // {
+        // test: /\.css$/,
+        // loader: ExtractTextPlugin.extract('style', 'css?importLoaders=1!postcss')
         // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
-      },
+      // },
       // JSON is not enabled by default in Webpack but both Node and Browserify
       // allow it implicitly so we also enable it.
       {
@@ -165,7 +180,7 @@ module.exports = {
       }
     ]
   },
-  
+
   // We use PostCSS for autoprefixing only.
   postcss: function() {
     return [
@@ -228,7 +243,7 @@ module.exports = {
       }
     }),
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
-    new ExtractTextPlugin('static/css/[name].[contenthash:8].css'),
+    // new ExtractTextPlugin('static/css/[name].[contenthash:8].css'),
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without
     // having to parse `index.html`.

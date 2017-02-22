@@ -1,7 +1,9 @@
 import * as _ from 'lodash'
 import Q from 'js-queue'
 
-let conn = new WebSocket('ws://localhost:8001')
+const HOST = location.origin.replace(/^http/, 'ws')
+let conn = new WebSocket(HOST);
+
 let queue = new Q()
 queue.stop = true
 
@@ -16,7 +18,10 @@ export const websocketMiddleware = store => {
   conn.onmessage = (event) => {
     let action = JSON.parse(event.data)
     action.type = 'REMOTE_'+action.type
-    store.dispatch(action)
+    let id = store.getState().user.id
+    if (id !== action.id) {
+      store.dispatch(action)
+    }
   }
 
   conn.onopen = () => {
