@@ -14,9 +14,9 @@ function sendMessage(action) {
   }
 }
 
-const keepAlive = (conn) => {
+const keepAlive = (store) => {
   setInterval(() => {
-    conn.send(JSON.stringify({type: 'KEEPALIVE'}))
+    store.dispatch({type: 'KEEPALIVE'})
   }, 30000)
 }
 
@@ -31,7 +31,7 @@ export const websocketMiddleware = store => {
   }
 
   conn.onopen = () => {
-    keepAlive(conn)
+    keepAlive(store)
     queue.stop = false
     queue.next()
   }

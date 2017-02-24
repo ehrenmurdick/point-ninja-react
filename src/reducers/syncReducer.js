@@ -3,7 +3,7 @@ export const syncReducer = (state = false, action) => {
     case 'SYNC':
       return true
     case 'REMOTE_RESET':
-    case 'REMOTE_NOBODY_HOME':
+    case 'SYNC_TIMEOUT':
       return false
     default:
       return state
