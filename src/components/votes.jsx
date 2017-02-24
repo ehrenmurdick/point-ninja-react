@@ -7,11 +7,11 @@ import { OtherVote } from './otherVote'
 
 const vote = (user) => (participant) => {
   let isCurrentUser = participant.id === user.id
-  return <div key={participant.id} className="vote">
-    <div className="participant">{
+  return <div key={participant.id} className="vote col-xs-12">
+    <div className="participant col-xs-6">{
       isCurrentUser ? <Name /> : participant.name || "anon"
     }</div>
-    <div className="value">
+    <div className="value col-xs-6">
       { isCurrentUser ? <MyVote participant={participant}/> : <OtherVote participant={participant} /> }
     </div>
   </div>
@@ -20,7 +20,9 @@ const vote = (user) => (participant) => {
 const view = ({participants, user, nextRound}) => (
   <div className="votes">
     {map(participants, vote(user))}
-    <button onClick={nextRound}>Next round!</button>
+    <div className="">
+      <button onClick={nextRound}>Next round!</button>
+    </div>
   </div>
 )
 
