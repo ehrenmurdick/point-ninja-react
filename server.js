@@ -7,7 +7,7 @@ const _ = require('lodash')
 
 const redisURL = process.env.REDIS_URL
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3001
 const INDEX = 'index.html'
 
 const publisher = redis.createClient(redisURL)

@@ -60,8 +60,7 @@
     "start-dev": "node scripts/start.js",
     "start": "node server.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom",
-    "postinstall": "npm run build"
+    "test": "node scripts/test.js --env=jsdom"
   },
   "jest": {
     "collectCoverageFrom": [
