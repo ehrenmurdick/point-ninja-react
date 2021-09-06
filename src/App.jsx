@@ -3,8 +3,6 @@ import { hashHistory } from 'react-router'
 import { Votes } from './components'
 import * as _ from 'lodash'
 
-import './App.css';
-
 class App extends Component {
   static contextTypes = { store: React.PropTypes.object }
 

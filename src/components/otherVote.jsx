@@ -10,7 +10,7 @@ const view = ({show, participant}) => {
   }
 
   return <div>
-    { show ? vote : "hidden" }
+    { show ? vote : "" }
   </div>
 }
 

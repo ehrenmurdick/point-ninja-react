@@ -6,14 +6,14 @@ let nameInput
 
 const view = ({user, editingName, editName, updateName}) => {
   if (editingName) {
-    return <div>
+    return <div className="submit change">
       <form onSubmit={updateName}>
         <input autoFocus type="text" ref={(e) => nameInput = e} />
         <button>save</button>
       </form>
     </div>
   } else {
-    return <div>
+    return <div className="change">
       {user.name || 'anon (you)'}
       <button onClick={editName}>change</button>
     </div>

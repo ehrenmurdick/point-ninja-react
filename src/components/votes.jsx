@@ -1,42 +1,51 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { map } from 'lodash'
-import { Name } from './name'
-import { MyVote } from './myVote'
-import { OtherVote } from './otherVote'
+import React from "react";
+import { connect } from "react-redux";
+import { map } from "lodash";
+import { Name } from "./name";
+import { MyVote } from "./myVote";
+import { OtherVote } from "./otherVote";
 
-const vote = (user) => (participant) => {
-  let isCurrentUser = participant.id === user.id
-  return <div key={participant.id} className="vote col-xs-12">
-    <div className="participant col-xs-6">{
-      isCurrentUser ? <Name /> : participant.name || "anon"
-    }</div>
-    <div className="value col-xs-6">
-      { isCurrentUser ? <MyVote participant={participant}/> : <OtherVote participant={participant} /> }
-    </div>
-  </div>
-}
+const vote = user => participant => {
+  let isCurrentUser = participant.id === user.id;
+  return (
+    <tr key={participant.id} className="vote">
+      <td className="participant">
+        {isCurrentUser ? <Name /> : participant.name || "anon"}
+      </td>
+      <td className="value">
+        {isCurrentUser ? (
+          <MyVote participant={participant} />
+        ) : (
+          <OtherVote participant={participant} />
+        )}
+      </td>
+    </tr>
+  );
+};
 
-const view = ({participants, user, nextRound}) => (
-  <div className="votes">
+const view = ({ participants, user, nextRound }) => (
+  <table className="votes">
     {map(participants, vote(user))}
-    <div className="">
-      <button onClick={nextRound}>Next round!</button>
-    </div>
-  </div>
-)
+    <tr className="next-round">
+      <td>
+        <button className="next-round" onClick={nextRound}>Next round!</button>
+        <small>facilitator only</small>
+      </td>
+    </tr>
+  </table>
+);
 
-const mapToProps = ({participants, user}) => ({
+const mapToProps = ({ participants, user }) => ({
   participants,
   user
-})
+});
 
-const mapToDispatch = (dispatch) => ({
+const mapToDispatch = dispatch => ({
   nextRound: () => {
     dispatch({
       type: "NEXT"
-    })
+    });
   }
-})
+});
 
-export const Votes = connect(mapToProps, mapToDispatch)(view)
+export const Votes = connect(mapToProps, mapToDispatch)(view);

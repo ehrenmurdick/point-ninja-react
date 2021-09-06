@@ -5,8 +5,8 @@ let voteInput
 
 const voteForm = (sendVote) => {
   return <form onSubmit={sendVote}>
-    <input type="number" ref={(e) => voteInput = e} />
-    <button>vote</button>
+    <input className="vote" type="number" ref={(e) => voteInput = e} />
+    <button className="vote">vote</button>
   </form>
 }
 
